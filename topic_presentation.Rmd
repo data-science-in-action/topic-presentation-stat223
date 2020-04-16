@@ -227,30 +227,40 @@ knitr::include_graphics("image/start date.PNG")
 &emsp;&emsp;通过绘制八个海外国家的疫情曲线来辅助预测全球疫情趋势，并揭示了不同国家的疫情传播模式。从下图疫情数据曲线中容易看出，意大利、韩国、伊朗、法国等国家的确诊人数增长速度较快。
 
 ```{r，echo=FALSE}
-Data <- read.table("data/confirmed number.csv",sep = ",",header=T)
-library(zoo)
-library(xts)
-options(warn=-1)
-faguo <- xts(Data$France, as.Date(Data$time, format='%Y/%m/%d'))
-deguo <- xts(Data$Germany, as.Date(Data$time, format='%Y/%m/%d'))
-yilang <- xts(Data$Iran, as.Date(Data$time, format='%Y/%m/%d'))
-yidali <- xts(Data$Italy, as.Date(Data$time, format='%Y/%m/%d'))
-xibanya <- xts(Data$Spance, as.Date(Data$time, format='%Y/%m/%d'))
-ruidian <- xts(Data$Switzerland, as.Date(Data$time, format='%Y/%m/%d'))
-yingguo <- xts(Data$UK, as.Date(Data$time, format='%Y/%m/%d'))
-meiguo <- xts(Data$US, as.Date(Data$time, format='%Y/%m/%d'))
-plot(faguo,type='l',main ='',col="blue")
-lines(deguo,type='l',main='',col="red")
-lines(yilang,type='l',main='',col="green")
-lines(yidali,type='l',main ='',col="grey")
-lines(xibanya,type='l',main='',col="yellow")
-lines(ruidian,type='l',main='',col="black")
-lines(yingguo,type='l',main='',col="brown")
-lines(meiguo,type='l',main='',col="purple")
+library(ggplot2)
+library(reshape2)
+library(forcats)
+data<-read.csv('confirmed number.csv')
+data<-melt(data,id.vars = 'day',
+            variable.name = "country",value.name = "num") 
+num <- c(runif(53),runif(53,min=100,max=560000))
+data$day<-fct_inorder(data$day)
+ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = country )) +
+       geom_line(size = 0.5) +
+       geom_point(size = 1.5) +
+       labs(title = "八个国家确诊人数:",subtitle = "单位：人",x = '时间',y = '人数') +
+       theme(axis.text.x = element_text(angle = 60, hjust = 0.5, vjust =0.5 ,size = 8))
+
 ```
 
 ---
 
+```
+library(ggplot2)
+library(reshape2)
+library(forcats)
+data<-read.csv('confirmed number(no US).csv')
+data<-melt(data,id.vars = 'day',
+            variable.name = "country",value.name = "num") 
+num <- c(runif(53),runif(53,min=100,max=560000))
+data$day<-fct_inorder(data$day)
+ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = country )) +
+       geom_line(size = 0.5) +
+       geom_point(size = 1.5) +
+       labs(title = "八个国家确诊人数:",subtitle = "单位：人",x = '时间',y = '人数') +
+       theme(axis.text.x = element_text(angle = 60, hjust = 0.5, vjust =0.5 ,size = 8))
+
+```
 &emsp;&emsp;将各个国家疫情曲线的绘制起始时间设置为八个国家中确诊人数达到一百例的日期。(如韩国是2020年2月20号)
 
 &emsp;&emsp;一般来说，疫情曲线遵先上升--到达顶峰--下降的规律。然而，在文章的观测期间（上图中也可以看出），八个国家仍然处在它们的疫情人数上升阶段，尚未到达疫情顶峰或下降阶段。
