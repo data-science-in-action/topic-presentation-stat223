@@ -245,7 +245,7 @@ ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = cou
 
 ---
 
-```
+```{r，echo=FALSE}
 library(ggplot2)
 library(reshape2)
 library(forcats)
@@ -284,7 +284,7 @@ ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = cou
 
 ### 4.3 模型预测
 
-&emsp;&emsp;从3个预测模型的比较结果中，关于COVID-19疫情的发展文章中有不同的结果。由于不同的模型建立在不同的理论和假设上，其输出测量值也不同，其中累计数为Logistic模型，active数为SEIR模型。从结果中可以看出三种数理模型的差异，并进一步展示了在不考虑干预的情况下的预测差异。
+&emsp;&emsp;从3个预测模型的比较结果中，关于COVID-19疫情的发展文章中有不同的结果。由于不同的模型建立在不同的理论和假设上，其输出测量值也不同，其中累计数为Logistic模型，active数为SEIR模型。从结果中可以看出三种数理模型的差异，并进一步展示了在不考虑干预的情况下的模型预测差异。
 
 ---
 
