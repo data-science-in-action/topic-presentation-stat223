@@ -1,7 +1,7 @@
 ---
 title: "预测COVID-19的全球扩散"
 subtitle: "——基于Logistic模型和SEIR模型"
-author: "肖世莺，张红丽，成宏媛，王瑜"
+author: "肖世莺 张红丽 成宏媛 王瑜"
 date: "2020/04/15"
 output:
   xaringan::moon_reader:
@@ -11,7 +11,6 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
----
 ---
 
 class: center, middle
@@ -96,7 +95,7 @@ $$P(t)=\frac{P_0P_me^{rt}}{P_m+P_0 (e^{rt}-1)}\tag{2}$$
 
 ### 2.2 基本SEIR模型（无任何干预和措施）
 
-&emsp;&emsp;SEIR模型是带潜伏期的恶性传染病模型。SEIR模型将人群分类，每种类型作为一个“仓室”存在，假设在同一“仓室”中的每个个体具有相同的特征。
+&emsp;&emsp;SEIR模型是带潜伏期的恶性传染病模型。SEIR模型假设总人口不变，将人群分类，每种类型作为一个“仓室”存在，假设在同一“仓室”中的每个个体具有相同的特征。
 
 --
 
@@ -193,7 +192,7 @@ $$\frac{dR}{dt}=(\gamma_I+\alpha)I+(\gamma_H+\alpha)H$$
 
 $$R_0=\frac{\beta}{\gamma}=\frac{k*b}{1/D}$$
 
-其中 $\beta$ 是 $(k)$ 和 $b$ 的乘积， $(k)$ 是与确诊人员进行接触的人数， $b$ 是接触后可能感染的概率。 $\gamma=1/D$ 是感染人群中恢复健康或者死亡的平均比率， $D$ 是感染的平均持续时间。
+其中 $\beta$ 是 $k$ 和 $b$ 的乘积， $k$ 是与确诊人员进行接触的人数， $b$ 是接触后可能感染的概率。 $\gamma=1/D$ 是感染人群中恢复健康或者死亡的平均比率， $D$ 是感染的平均持续时间。
 
 ---
 
@@ -206,6 +205,10 @@ $$R_0=\frac{\beta}{\gamma}=\frac{k*b}{1/D}$$
 --
 
 &emsp;&emsp;由于早期报告的确诊病例数量通常不准确或缺失，因此将模型的起始日期设置为达到第100个确诊病例的日期，这表明8个受观察国家的起始日期不同。
+
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("image/start date.PNG")
+```
 
 ---
 
@@ -223,27 +226,8 @@ $$R_0=\frac{\beta}{\gamma}=\frac{k*b}{1/D}$$
  
 &emsp;&emsp;通过绘制八个海外国家的疫情曲线来辅助预测全球疫情趋势，并揭示了不同国家的疫情传播模式。从下图疫情数据曲线中容易看出，意大利、韩国、伊朗、法国等国家的确诊人数增长速度较快。
 
-```{r，echo=FALSE}
-Data <- read.table("data/confirmed number.csv",sep = ",",header=T)
-library(zoo)
-library(xts)
-options(warn=-1)
-faguo <- xts(Data$France, as.Date(Data$time, format='%Y/%m/%d'))
-deguo <- xts(Data$Germany, as.Date(Data$time, format='%Y/%m/%d'))
-yilang <- xts(Data$Iran, as.Date(Data$time, format='%Y/%m/%d'))
-yidali <- xts(Data$Italy, as.Date(Data$time, format='%Y/%m/%d'))
-xibanya <- xts(Data$Spance, as.Date(Data$time, format='%Y/%m/%d'))
-ruidian <- xts(Data$Switzerland, as.Date(Data$time, format='%Y/%m/%d'))
-yingguo <- xts(Data$UK, as.Date(Data$time, format='%Y/%m/%d'))
-meiguo <- xts(Data$US, as.Date(Data$time, format='%Y/%m/%d'))
-plot(faguo,type='l',main ='',col="blue")
-lines(deguo,type='l',main='',col="red")
-lines(yilang,type='l',main='',col="green")
-lines(yidali,type='l',main ='',col="grey")
-lines(xibanya,type='l',main='',col="yellow")
-lines(ruidian,type='l',main='',col="black")
-lines(yingguo,type='l',main='',col="brown")
-lines(meiguo,type='l',main='',col="purple")
+```{r echo=FALSE}
+
 ```
 
 ---
