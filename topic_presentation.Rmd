@@ -226,8 +226,27 @@ knitr::include_graphics("image/start date.PNG")
  
 &emsp;&emsp;通过绘制八个海外国家的疫情曲线来辅助预测全球疫情趋势，并揭示了不同国家的疫情传播模式。从下图疫情数据曲线中容易看出，意大利、韩国、伊朗、法国等国家的确诊人数增长速度较快。
 
-```{r echo=FALSE}
-
+```{r，echo=FALSE}
+Data <- read.table("data/confirmed number.csv",sep = ",",header=T)
+library(zoo)
+library(xts)
+options(warn=-1)
+faguo <- xts(Data$France, as.Date(Data$time, format='%Y/%m/%d'))
+deguo <- xts(Data$Germany, as.Date(Data$time, format='%Y/%m/%d'))
+yilang <- xts(Data$Iran, as.Date(Data$time, format='%Y/%m/%d'))
+yidali <- xts(Data$Italy, as.Date(Data$time, format='%Y/%m/%d'))
+xibanya <- xts(Data$Spance, as.Date(Data$time, format='%Y/%m/%d'))
+ruidian <- xts(Data$Switzerland, as.Date(Data$time, format='%Y/%m/%d'))
+yingguo <- xts(Data$UK, as.Date(Data$time, format='%Y/%m/%d'))
+meiguo <- xts(Data$US, as.Date(Data$time, format='%Y/%m/%d'))
+plot(faguo,type='l',main ='',col="blue")
+lines(deguo,type='l',main='',col="red")
+lines(yilang,type='l',main='',col="green")
+lines(yidali,type='l',main ='',col="grey")
+lines(xibanya,type='l',main='',col="yellow")
+lines(ruidian,type='l',main='',col="black")
+lines(yingguo,type='l',main='',col="brown")
+lines(meiguo,type='l',main='',col="purple")
 ```
 
 ---
