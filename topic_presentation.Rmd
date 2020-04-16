@@ -220,47 +220,62 @@ knitr::include_graphics("image/start date.PNG")
 
 ---
 
-## 4 结论
+class: center, middle
+
+# 4 结论
+
+---
 
 ### 4.1 COVID-19疫情进展
  
 &emsp;&emsp;通过绘制八个海外国家的疫情曲线来辅助预测全球疫情趋势，并揭示了不同国家的疫情传播模式。从下图疫情数据曲线中容易看出，意大利、韩国、伊朗、法国等国家的确诊人数增长速度较快。
 
-```{r，echo=FALSE}
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("image/8countries.PNG")
+```
+
+???
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(reshape2)
 library(forcats)
-data<-read.csv('confirmed number.csv')
-data<-melt(data,id.vars = 'day',
-            variable.name = "country",value.name = "num") 
-num <- c(runif(53),runif(53,min=100,max=560000))
-data$day<-fct_inorder(data$day)
-ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = country )) +
+data <- read.csv("data/confirmed number.csv")
+data <- melt(data, id.vars = "time", variable.name = "country", value.name = "num") 
+num <- c(runif(53), runif(53,min=100,max=560000))
+data$time <- fct_inorder(data$time)
+ggplot(data = data, mapping = aes(x = time, y = num, colour = country, group = country )) +
        geom_line(size = 0.5) +
        geom_point(size = 1.5) +
-       labs(title = "八个国家确诊人数:",subtitle = "单位：人",x = '时间',y = '人数') +
+       labs(title = "八个国家确诊人数",subtitle = "单位：人",x = "时间",y = "人数") +
        theme(axis.text.x = element_text(angle = 60, hjust = 0.5, vjust =0.5 ,size = 8))
-
 ```
 
 ---
 
-```{r，echo=FALSE}
+```{r fig.align='center', echo=FALSE}
+knitr::include_graphics("image/7countries.PNG")
+```
+
+???
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(reshape2)
 library(forcats)
-data<-read.csv('confirmed number(no US).csv')
-data<-melt(data,id.vars = 'day',
-            variable.name = "country",value.name = "num") 
-num <- c(runif(53),runif(53,min=100,max=560000))
-data$day<-fct_inorder(data$day)
+data <- read.csv("data/confirmed number(no us).csv")
+data <- melt(data,id.vars = "day", variable.name = "country", value.name = "num") 
+num <- c(runif(53), runif(53, min=100, max=560000))
+data$day <- fct_inorder(data$day)
 ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = country )) +
        geom_line(size = 0.5) +
        geom_point(size = 1.5) +
-       labs(title = "八个国家确诊人数:",subtitle = "单位：人",x = '时间',y = '人数') +
+       labs(title = "八个国家确诊人数",subtitle = "单位：人",x = '时间',y = '人数') +
        theme(axis.text.x = element_text(angle = 60, hjust = 0.5, vjust =0.5 ,size = 8))
-
 ```
+
+--
+
 &emsp;&emsp;将各个国家疫情曲线的绘制起始时间设置为八个国家中确诊人数达到一百例的日期。(如韩国是2020年2月20号)
 
 &emsp;&emsp;一般来说，疫情曲线遵先上升--到达顶峰--下降的规律。然而，在文章的观测期间（上图中也可以看出），八个国家仍然处在它们的疫情人数上升阶段，尚未到达疫情顶峰或下降阶段。
@@ -292,7 +307,7 @@ ggplot(data = data, mapping = aes(x = day, y = num, colour = country,group = cou
 knitr::include_graphics("image/table1.png")
 ```
 
-&emsp;&emsp;基于logistic模型，文章预测了8个国家的疫情发展趋势，详细地列出了各国的预测结果和增长轨迹。例如，该模型将意大利的感染高峰时间设定在2020年2月23日开始后的50天，最多感染人数为97442人。基于Logistic模型根据目前报道的数据是无法预测美国的感染人数，因为其呈现为指数增长，难以拟合Logistic曲线，这也表明了美国正处于疫情迅速传播的阶段。
+&emsp;&emsp;基于Logistic模型，文章预测了8个国家的疫情发展趋势，详细地列出了各国的预测结果和增长轨迹。例如，该模型将意大利的感染高峰时间设定在2020年2月23日开始后的50天，最多感染人数为97442人。基于Logistic模型根据目前报道的数据是无法预测美国的感染人数，因为其呈现为指数增长，难以拟合Logistic曲线，这也表明了美国正处于疫情迅速传播的阶段。
 
 ---
 
