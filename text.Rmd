@@ -1,5 +1,6 @@
 ---
-title: "预测COVID-19的全球扩散——基于Logistic模型和SEIR模型"
+title: "预测COVID-19的全球扩散"
+subtitle: "——基于Logistic模型和SEIR模型"
 author:
   - 肖世莺
   - 张红丽
@@ -45,7 +46,7 @@ $$P(t)=\frac{KP_0 e^{rt}}{K+P_0 (e^{rt}-1)}\tag{2}$$
 
 $$\frac{dS}{dt}=-\frac{\beta SI}{N}$$
 
-$$\frac{dE}{dt}=-\frac{\beta SI}{N}-\sigma E$$
+$$\frac{dE}{dt}=\frac{\beta SI}{N}-\sigma E$$
 
 $$\frac{dI}{dt}=\sigma E-\gamma I$$
 
@@ -67,7 +68,7 @@ $$\frac{dE_q}{dt}=\beta cqS(I+\theta E)-\delta_qE_q$$
 
 $$\frac{dH}{dt}=\delta_II+\delta_qE_q-(\alpha+\gamma_H)H$$
 
-$$\frac{dR}{dt}=\gamma_II+\gamma_HH$$
+$$\frac{dR}{dt}=(\gamma_I+\alpha)I+(\gamma_H+\alpha)H$$
 
 尽管通过实施多种不同的控制措施，各国都减少了人们的社会接触，但我们以接触率和隔离比例作为模型参数进行了初步估算。此外，由于在一段时期的病例数增加之后检疫和控制措施才生效，通常已经激增到相当数量，因此，在改进的模型中使用的8个观察国家的起始日期不同，它们被定义为各国政府宣布对大规模人口采取严格的干预措施和控制措施的日期。
 
@@ -79,7 +80,7 @@ $$\frac{dR}{dt}=\gamma_II+\gamma_HH$$
 
 $$R_0=\frac{\beta}{\gamma}=\frac{k*b}{1/D}$$
 
-其中$\beta$是$(k)$和$b$的乘积，$(k)$是与确诊人员进行接触的人数，$b$是接触后可能感染的概率。$\gamma=1/D$是感染人群中恢复健康或者死亡的平均比率，$D$是感染的平均持续时间。根据COVID-19疫情的相关研究$^{[7]}$中的假设，将$D=7$来获得$R_0$的估计值。
+其中$\beta$是$k$和$b$的乘积，$k$是与确诊人员进行接触的人数，$b$是接触后可能感染的概率。$\gamma=1/D$是感染人群中恢复健康或者死亡的平均比率，$D$是感染的平均持续时间。根据COVID-19疫情的相关研究$^{[7]}$中的假设，将$D=7$来获得$R_0$的估计值。
 
 # 结论
 
